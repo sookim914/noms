@@ -4,10 +4,10 @@ import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 
-const reviews = ({ match }) => {
+const Reviews = ({ user, match, alert }) => {
   const [reviews, setreviews] = useState([])
   // const [deleted, setDeleted] = useState(false)
-
+  // const [deleted, setDeleted] = useState(false)
   // dependency list -> we can run dependency list and anytime it changes, I would like you to run this function. Use this effect and treated as componentdidmount
   useEffect(() => {
     axios({
@@ -20,19 +20,40 @@ const reviews = ({ match }) => {
       .catch(console.error)
   }, [])
 
+  const styles = {
+    fontWeight: 'bold'
+  }
+
+  const destroy = (id) => {
+    axios({
+      url: `${apiUrl}/items/${match.params.id}/reviews/${id}`,
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${user.token}`
+      }
+    })
+      // .then(() => setDeleted(true))
+      .then(() => alert({ heading: 'Success', message: 'You deleted a review', variant: 'success' }))
+      .then(() => history.push(`/items/${match.params.id}`))
+      .catch(() => alert({ heading: 'Rut roh', message: 'Something went wrong', variant: 'danger' }))
+  }
+
   const reviewJsx = reviews.map(review => (
-    <p key={review._id}>
+    <div key={review._id}>
+      <div style={styles}> {review.owner.email} </div>
       rating: {review.rating} <br/>
       <img src={review.url}/>
-    </p>
+      { review.owner.token === user.token && <Link to={`/items/${match.params.id}/reviews/${review._id}`}><Button>Edit the review</Button></Link>}
+      { review.owner.token === user.token && <Button onClick={ () => destroy(review._id) }>Delete</Button>}
+    </div>
   ))
 
   return (
     <Fragment>
-      {reviewJsx} <br />
-      <Link to={`/items/${match.params.id}/reviews`}><Button>Write a review!</Button></Link>
+      <Link to={`/items/${match.params.id}/reviews`}><Button>Write a review!</Button></Link> <br />
+      {reviewJsx}
     </Fragment>
   )
 }
 // function that will that wrap component that will send child prop
-export default withRouter(reviews)
+export default withRouter(Reviews)
