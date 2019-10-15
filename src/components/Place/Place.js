@@ -4,7 +4,7 @@ import { withRouter, Link } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 
-const place = ({ user, alerts, match }) => {
+const Place = ({ user, alerts, match }) => {
   const [place, setplace] = useState({ items: [], name: '' })
   // const [deleted, setDeleted] = useState(false)
 
@@ -38,4 +38,4 @@ const place = ({ user, alerts, match }) => {
   )
 }
 // function that will that wrap component that will send child prop
-export default withRouter(place)
+export default withRouter(Place)

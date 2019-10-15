@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import ReviewForm from './ReviewForm'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
-import { Redirect } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 
-const CreateReview = ({ user, match }) => {
+const CreateReview = ({ user, match, alert }) => {
   const reviewObject = {
     rating: '',
     url: '',
@@ -27,7 +27,6 @@ const CreateReview = ({ user, match }) => {
   // }
 
   const handleSubmit = event => {
-    console.log(match.params.id)
     event.preventDefault()
     axios({
       url: `${apiUrl}/items/${match.params.id}/reviews`,
@@ -38,11 +37,12 @@ const CreateReview = ({ user, match }) => {
       }
     })
       .then(res => setCreated(res.data.review._id))
-      .catch(console.error)
+      .then(() => alert({ heading: 'Success', message: 'You created a review', variant: 'success' }))
+      .catch(() => alert({ heading: 'Rut roh', message: 'Something went wrong', variant: 'danger' }))
   }
 
   if (created) {
-    return <Redirect to={`/reviews/${created}`}/>
+    return <Redirect to={`/items/${match.params.id}`}/>
   }
 
   return (
@@ -50,9 +50,9 @@ const CreateReview = ({ user, match }) => {
       review={review}
       handleChange={handleChange}
       handleSubmit={handleSubmit}
-      cancelPath='/'
+      cancelPath={`/${match.params.id}`}
     />
   )
 }
 
-export default CreateReview
+export default withRouter(CreateReview)

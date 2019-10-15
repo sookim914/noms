@@ -1,9 +1,10 @@
 import React from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import { withRouter } from 'react-router-dom'
 
-const ReviewForm = ({ review, handleChange, handleSubmit }) => {
-  const cancelPath = review.id ? `#/reviews/${review._id}` : '#reviews'
+const ReviewForm = ({ match, review, handleChange, handleSubmit }) => {
+  const cancelPath = review.id ? `#/reviews/${review._id}` : `#/items/${match.params.id}`
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -22,4 +23,4 @@ const ReviewForm = ({ review, handleChange, handleSubmit }) => {
   )
 }
 
-export default ReviewForm
+export default withRouter(ReviewForm)

@@ -3,7 +3,7 @@ import axios from 'axios'
 import apiUrl from '../../apiConfig'
 import { Link } from 'react-router-dom'
 
-const places = ({ user, alert }) => {
+const Places = ({ user, alert }) => {
   const [places, setplaces] = useState([])
 
   // dependency list -> we can run dependency list and anytime it changes, I would like you to run this function. Use this effect and treated as componentdidmount
@@ -23,10 +23,10 @@ const places = ({ user, alert }) => {
   ))
   return (
     <Fragment>
-      <h1>places</h1>
+      <h1>Restuarants</h1>
       {placesJsx}
     </Fragment>
   )
 }
 
-export default places
+export default Places
