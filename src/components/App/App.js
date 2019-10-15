@@ -12,6 +12,7 @@ import Places from '../Place/Places'
 import Place from '../Place/Place'
 import CreateReview from '../Review/CreateReview'
 import Reviews from '../Review/Reviews'
+import EditReview from '../Review/EditReview'
 
 class App extends Component {
   constructor () {
@@ -60,8 +61,9 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} exact path='/places' component={Places} />
           <AuthenticatedRoute user={user} exact path='/places/:id' component={Place} />
-          <AuthenticatedRoute user={user} exact path='/items/:id' component={Reviews} />
-          <AuthenticatedRoute user={user} exact path='/items/:id/reviews' render={(props) => (<CreateReview {...props} user={user}/>)} />
+          <AuthenticatedRoute user={user} exact path='/items/:id' render={(props) => (<Reviews {...props} alert={this.alert} user={user}/>)} />
+          <AuthenticatedRoute user={user} exact path='/items/:id/reviews' render={(props) => (<CreateReview {...props} alert={this.alert} user={user}/>)} />
+          <AuthenticatedRoute user={user} exact path='/items/:id/reviews/:rid' render={(props) => (<EditReview alert={this.alert} {...props} user={user}/>)} />
 
         </main>
       </Fragment>
