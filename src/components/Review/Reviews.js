@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 
-const Reviews = ({ user, match, alert }) => {
+const Reviews = ({ user, match, alert, history }) => {
   const [reviews, setreviews] = useState([])
   // const [deleted, setDeleted] = useState(false)
   // const [deleted, setDeleted] = useState(false)
@@ -25,6 +25,7 @@ const Reviews = ({ user, match, alert }) => {
   }
 
   const destroy = (id) => {
+    event.preventDefault()
     axios({
       url: `${apiUrl}/items/${match.params.id}/reviews/${id}`,
       method: 'DELETE',
@@ -33,8 +34,13 @@ const Reviews = ({ user, match, alert }) => {
       }
     })
       // .then(() => setDeleted(true))
+      // .then(() => deletefunc(deleted))
       .then(() => alert({ heading: 'Success', message: 'You deleted a review', variant: 'success' }))
-      .then(() => history.push(`/items/${match.params.id}`))
+      .then(() => {
+        history.replace('/reload')
+        history.replace(`/items/${match.params.id}`)
+      })
+      // .then(() => history.push(`/items/${match.params.id}`))
       .catch(() => alert({ heading: 'Rut roh', message: 'Something went wrong', variant: 'danger' }))
   }
 
@@ -47,6 +53,10 @@ const Reviews = ({ user, match, alert }) => {
       { review.owner.token === user.token && <Button onClick={ () => destroy(review._id) }>Delete</Button>}
     </div>
   ))
+  //
+  // if (deleted) {
+  //   return <Redirect to={`/items/${match.params.id}`} />
+  // }
 
   return (
     <Fragment>
