@@ -4,9 +4,11 @@ import axios from 'axios'
 import apiUrl from '../../apiConfig'
 import { Redirect } from 'react-router-dom'
 
-const CreateReview = ({ user }) => {
+const CreateReview = ({ user, match }) => {
   const reviewObject = {
-    rating: ''
+    rating: '',
+    url: '',
+    fileType: ''
   }
   const [created, setCreated] = useState(false)
   const [review, setreview] = useState(reviewObject)
@@ -25,11 +27,10 @@ const CreateReview = ({ user }) => {
   // }
 
   const handleSubmit = event => {
+    console.log(match.params.id)
     event.preventDefault()
-    console.log('here')
-
     axios({
-      url: `${apiUrl}/items/:id`,
+      url: `${apiUrl}/items/${match.params.id}/reviews`,
       method: 'POST',
       data: { review },
       headers: {

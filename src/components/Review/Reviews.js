@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
@@ -15,7 +15,6 @@ const reviews = ({ match }) => {
       url: `${apiUrl}/items/${match.params.id}`
     })
       .then(responseData => {
-        console.log(responseData.data.item.reviews)
         setreviews(responseData.data.item.reviews)
       })
       .catch(console.error)
@@ -31,7 +30,7 @@ const reviews = ({ match }) => {
   return (
     <Fragment>
       {reviewJsx} <br />
-      <Button>Write a review!</Button>
+      <Link to={`/items/${match.params.id}/reviews`}><Button>Write a review!</Button></Link>
     </Fragment>
   )
 }

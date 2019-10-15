@@ -61,7 +61,7 @@ class App extends Component {
           <AuthenticatedRoute user={user} exact path='/places' component={Places} />
           <AuthenticatedRoute user={user} exact path='/places/:id' component={Place} />
           <AuthenticatedRoute user={user} exact path='/items/:id' component={Reviews} />
-          <AuthenticatedRoute user={user} exact path='/items/create' component={CreateReview} />
+          <AuthenticatedRoute user={user} exact path='/items/:id/reviews' render={(props) => (<CreateReview {...props} user={user}/>)} />
 
         </main>
       </Fragment>
