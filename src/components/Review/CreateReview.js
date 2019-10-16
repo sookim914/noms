@@ -7,15 +7,14 @@ import { Redirect, withRouter } from 'react-router-dom'
 const CreateReview = ({ user, match, alert }) => {
   const reviewObject = {
     rating: '',
-    url: '',
-    fileType: ''
+    url: ''
   }
   const [created, setCreated] = useState(false)
-  const [review, setreview] = useState(reviewObject)
+  const [review, setReview] = useState(reviewObject)
 
   const handleChange = event => {
     event.persist()
-    setreview(review => ({ ...review, [event.target.name]: event.target.value
+    setReview(review => ({ ...review, [event.target.name]: event.target.value
     }))
   }
 
@@ -28,13 +27,14 @@ const CreateReview = ({ user, match, alert }) => {
 
   const handleSubmit = event => {
     event.preventDefault()
+    const formData = new FormData(event.target)
     axios({
       url: `${apiUrl}/items/${match.params.id}/reviews`,
       method: 'POST',
-      data: { review },
       headers: {
         'Authorization': `Bearer ${user.token}`
-      }
+      },
+      data: formData
     })
       .then(res => setCreated(res.data.review._id))
       .then(() => alert({ heading: 'Success', message: 'You created a review', variant: 'success' }))
