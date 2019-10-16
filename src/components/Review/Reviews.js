@@ -60,6 +60,7 @@ const Reviews = ({ user, match, alert, history }) => {
 
   return (
     <Fragment>
+      <br />
       <Link to={`/items/${match.params.id}/reviews`}><Button>Write a review!</Button></Link> <br />
       {reviewJsx}
     </Fragment>
