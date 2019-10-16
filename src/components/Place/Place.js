@@ -26,7 +26,7 @@ const Place = ({ user, alerts, match }) => {
 
   const itemJsx = place.items.map(item => (
     <p key={item._id}>
-      <Link to={`/items/${item._id}`}><li>{item.name}</li></Link>
+      <Link to={`/items/${item._id}`}>{item.name}</Link>
     </p>
   ))
 
