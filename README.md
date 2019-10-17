@@ -1,5 +1,5 @@
 # About Noms
-For this project, I created a MERN (MongoDB, Express, React, Nodejs) stack app called Noms. It lets the user to rate, NOT the restuarant, but individual dish. Once the user sign in, the user can upload a picture and rate the dish (up to five stars). The user has an access to other users' ratings of that specific dish, but does not have any access to edit or delete other users' reviews. The user can update or delete their own review.
+For this project, I created a MERN (MongoDB, Express, React, Nodejs) stack app called Noms. It lets the user to rate, NOT the restuarant, but individual dish at the restuarant. Once the user signs in, the user can upload a picture and rate the dish (up to five stars). The user has an access to other users' ratings, but does not have any access to edit or delete other users' reviews. The user can update or delete their own review.
 
 - <a href=https://github.com/sookim-Boston/noms-backend>Repo for Noms' Express API</a>
 - <a href=https://github.com/sookim914/noms>Repo for Noms' frontend </a>
@@ -7,28 +7,23 @@ For this project, I created a MERN (MongoDB, Express, React, Nodejs) stack app c
 - <a href=https://sookim914.github.io/noms/>Noms</a>
 
 ### Technologies used
--MongoDB
--Express
 -React
 -Nodejs
 -JavaScript
--AWS
 
 ### Development Process
-1. Creat a wirefram, ERD (Entity Relation Diagram), and user stories to set up goals for the project
-2. Develop backend API/database using Express, MongoDB, and Mongoose
-3. Create a form where the user can rate/upload the dish
-4. Connect API events on the front end to API using axios/AJAX
+1. Created a wirefram and user stories to set up goals for the project
+2. Connect API events on the front end to API using axios/AJAX
     - show reviews: GET request
     - create review: POST request
     - update review: PATCH request
     - destory review: DELETE request
-5. Deploy
+3. Use star rating package and emoji package to let users to rate the dish using stars
 
 
 ### Challenges & Problem-Solving
 -  Route issue: the user can delete their review on the same page, where they see all the reviews for the dish. Once the user delete the review, the browser needs to be "refreshed" so that it will show the user updated browser with their review deleted. In order to do that, I used dummy route '/reload' before redirect the browser back to the review page.
-- File update: Whenever the user update the review with new file (picture), my backend is deleting the file and uploading the new file.
+- Delete and edit button: In order to let the user sees edit and delete buttons only for their posts they own, I used user.token and ternary oprator to verify the user owns the post
 
 
 ### Unsolved Problems
