@@ -13,7 +13,7 @@ const Places = ({ user, alert }) => {
       url: `${apiUrl}/places/`
     })
       .then(responseData => setplaces(responseData.data.places))
-      .catch(console.error)
+      .catch(() => alert({ heading: 'Rut roh', message: 'Something went wrong', variant: 'danger' }))
   }, [])
 
   const placesJsx = places.map(place => (

@@ -21,7 +21,7 @@ const EditReview = ({ user, match, alert, history }) => {
         'Authorization': `Bearer ${user.token}`
       }
     })
-      .catch(console.error)
+      .catch(() => alert({ heading: 'Rut roh', message: 'Something went wrong', variant: 'danger' }))
   }, [])
 
   const handleChange = event => {

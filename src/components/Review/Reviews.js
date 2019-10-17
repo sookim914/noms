@@ -23,7 +23,7 @@ const Reviews = ({ user, match, alert, history }) => {
           alert({ heading: 'Uh oh', message: 'No reviews yet!', variant: 'success' })
         }
       })
-      .catch(console.error)
+      .catch(() => alert({ heading: 'Rut roh', message: 'Something went wrong', variant: 'danger' }))
   }, [])
 
   const styles = {

@@ -17,7 +17,7 @@ const Place = ({ user, alerts, match }) => {
       .then(responseData => {
         setplace(responseData.data.place)
       })
-      .catch(console.error)
+      .catch(() => alert({ heading: 'Rut roh', message: 'Something went wrong', variant: 'danger' }))
   }, [])
 
   if (!place) {
