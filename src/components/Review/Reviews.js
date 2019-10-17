@@ -16,6 +16,12 @@ const Reviews = ({ user, match, alert, history }) => {
     })
       .then(responseData => {
         setreviews(responseData.data.item.reviews)
+        return responseData
+      })
+      .then((responseData) => {
+        if (responseData.data.item.reviews.length === 0) {
+          alert({ heading: 'Uh oh', message: 'No reviews yet!', variant: 'success' })
+        }
       })
       .catch(console.error)
   }, [])
