@@ -13,12 +13,15 @@ For this project, I created a MERN (MongoDB, Express, React, Nodejs) stack app c
 
 ### Development Process
 1. Created a wirefram and user stories to set up goals for the project
-2. Connect API events on the front end to API using axios/AJAX
+2. Use `npm` to install dependencies
+3. Connect API events on the front end to API using axios/AJAX
     - show reviews: GET request
     - create review: POST request
     - update review: PATCH request
     - destory review: DELETE request
-3. Use star rating package and emoji package to let users to rate the dish using stars
+4. Use star rating package and emoji package to let users to rate the dish using stars
+5. Use `npm run deploy` to deploy to Github pages
+
 
 
 ### Challenges & Problem-Solving
