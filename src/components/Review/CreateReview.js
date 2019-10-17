@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
+import StarRatings from 'react-star-ratings'
 import ReviewForm from './ReviewForm'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
@@ -6,7 +7,7 @@ import { Redirect, withRouter } from 'react-router-dom'
 
 const CreateReview = ({ user, match, alert }) => {
   const reviewObject = {
-    rating: '',
+    rating: 0,
     url: ''
   }
   const [created, setCreated] = useState(false)
@@ -18,16 +19,14 @@ const CreateReview = ({ user, match, alert }) => {
     }))
   }
 
-  // const handleChange = event => {
-  //   event.persist()
-  //   const editedreview = { ...review }
-  //   editedreview[event.target.name] = event.target.value
-  //   setreview(editedreview)
-  // }
+  const handleStarChange = event => {
+    setReview({ url: review.url, rating: event })
+  }
 
   const handleSubmit = event => {
     event.preventDefault()
     const formData = new FormData(event.target)
+    formData.append('rating', review.rating)
     axios({
       url: `${apiUrl}/items/${match.params.id}/reviews`,
       method: 'POST',
@@ -46,12 +45,21 @@ const CreateReview = ({ user, match, alert }) => {
   }
 
   return (
-    <ReviewForm
-      review={review}
-      handleChange={handleChange}
-      handleSubmit={handleSubmit}
-      cancelPath={`/${match.params.id}`}
-    />
+    <Fragment>
+      <StarRatings
+        starRatedColor="gold"
+        starHoverColor="gold"
+        changeRating={handleStarChange}
+        rating={review.rating}
+        name='rating'
+      />
+      <ReviewForm
+        review={review}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        cancelPath={`/${match.params.id}`}
+      />
+    </Fragment>
   )
 }
 

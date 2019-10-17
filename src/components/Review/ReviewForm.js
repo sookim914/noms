@@ -8,15 +8,6 @@ const ReviewForm = ({ match, review, handleChange, handleSubmit }) => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Form.Group controlId="rating">
-        <Form.Control
-          type="number"
-          placeholder="Rating"
-          name="rating"
-          onChange={handleChange}
-          value={review.rating}
-        />
-      </Form.Group>
       <Form.Group controlId="file" encType="multipart/form-data">
         <Form.Label>Upload</Form.Label>
         <Form.Control
