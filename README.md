@@ -11,16 +11,22 @@ For this project, I created a MERN (MongoDB, Express, React, Nodejs) stack app c
 -Nodejs
 -JavaScript
 
+### Set up and installation
+1. Create a github repo
+2. Use `npm` to install dependencies
+3. Add a new git remote
+3. Work locally with Grunt
+4. Use `npm run deploy` to deploy to Github pages
+
+
 ### Development Process
 1. Created a wirefram and user stories to set up goals for the project
-2. Use `npm` to install dependencies
-3. Connect API events on the front end to API using axios/AJAX
+2. Connect API events on the front end to API using axios/AJAX
     - show reviews: GET request
     - create review: POST request
     - update review: PATCH request
     - destory review: DELETE request
-4. Use star rating package and emoji package to let users to rate the dish using stars
-5. Use `npm run deploy` to deploy to Github pages
+3. Use star rating package and emoji package to let users to rate the dish using stars
 
 
 
@@ -45,10 +51,10 @@ As a user, I should be able to update my review
 As a user, I should be able to see other users' reviews
 As a user, I should be able to delete my review
 
-Screenshot of the app
+### Screenshot of the app
 
 <img src=https://i.imgur.com/ScAtlu3.png>
 
-Wireframes
+### Wireframes
 
 <img src=https://i.imgur.com/D7i26Bn.jpg>
