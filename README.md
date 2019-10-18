@@ -7,9 +7,9 @@ For this project, I created a MERN (MongoDB, Express, React, Nodejs) stack app c
 - <a href=https://sookim914.github.io/noms/>Noms</a>
 
 ### Technologies used
--React
--Nodejs
--JavaScript
+- React
+- Nodejs
+- JavaScript
 
 ### Set up and installation
 1. Create a github repo
