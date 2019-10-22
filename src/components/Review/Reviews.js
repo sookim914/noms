@@ -20,7 +20,7 @@ const Reviews = ({ user, match, alert, history }) => {
       })
       .then((responseData) => {
         if (responseData.data.item.reviews.length === 0) {
-          alert({ heading: 'Uh oh', message: 'No reviews yet! Be the first to review! ', variant: 'success' })
+          alert({ heading: 'Uh oh', message: 'No reviews yet! Be the first to review', variant: 'success' })
         }
       })
       .catch(() => alert({ heading: 'Rut roh', message: 'Something went wrong', variant: 'danger' }))

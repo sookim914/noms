@@ -13,9 +13,9 @@ const ReviewForm = ({ match, review, handleChange, handleSubmit }) => {
         <Form.Control
           type="file"
           placeholder="Upload"
-          name="url"
+          name="upload"
           onChange={handleChange}
-          value={review.url}
+          value={review.upload}
         />
       </Form.Group>
       <Button variant="primary" type="submit">Submit</Button>
