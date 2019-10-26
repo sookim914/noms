@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState } from 'react'
 import StarRatings from 'react-star-ratings'
 import ReviewForm from './ReviewForm'
 import axios from 'axios'
@@ -45,7 +45,7 @@ const CreateReview = ({ user, match, alert }) => {
   }
 
   return (
-    <Fragment>
+    <div>
       <StarRatings
         starRatedColor="gold"
         starHoverColor="gold"
@@ -59,7 +59,7 @@ const CreateReview = ({ user, match, alert }) => {
         handleSubmit={handleSubmit}
         cancelPath={`/${match.params.id}`}
       />
-    </Fragment>
+    </div>
   )
 }
 
