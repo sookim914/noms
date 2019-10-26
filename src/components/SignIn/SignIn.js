@@ -48,9 +48,15 @@ class SignIn extends Component {
   render () {
     const { email, password } = this.state
 
+    const style = {
+      color: '#6c6258',
+      fontSize: '18px',
+      fontFamily: 'Maven Pro'
+    }
+
     return (
       <div className="row">
-        <div className="col-sm-10 col-md-8 mx-auto mt-5">
+        <div style={style} className="col-sm-10 col-md-8 mx-auto mt-5">
           <h3>Sign In</h3>
           <Form onSubmit={this.onSignIn}>
             <Form.Group controlId="email">
@@ -76,7 +82,7 @@ class SignIn extends Component {
               />
             </Form.Group>
             <Button
-              variant="primary"
+              variant="danger"
               type="submit"
             >
               Submit

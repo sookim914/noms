@@ -47,9 +47,15 @@ class ChangePassword extends Component {
   render () {
     const { oldPassword, newPassword } = this.state
 
+    const style = {
+      color: '#6c6258',
+      fontSize: '18px',
+      fontFamily: 'Maven Pro'
+    }
+
     return (
       <div className="row">
-        <div className="col-sm-10 col-md-8 mx-auto mt-5">
+        <div style={style} className="col-sm-10 col-md-8 mx-auto mt-5">
           <h3>Change Password</h3>
           <Form onSubmit={this.onChangePassword}>
             <Form.Group controlId="oldPassword">
@@ -75,7 +81,7 @@ class ChangePassword extends Component {
               />
             </Form.Group>
             <Button
-              variant="primary"
+              variant="danger"
               type="submit"
             >
               Submit
