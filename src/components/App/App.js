@@ -9,10 +9,12 @@ import SignIn from '../SignIn/SignIn'
 import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
 import Places from '../Place/Places'
-import Place from '../Place/Place'
 import CreateReview from '../Review/CreateReview'
 import Reviews from '../Review/Reviews'
 import EditReview from '../Review/EditReview'
+import Home from '../Place/Home'
+import CreateItem from '../Place/CreateItem'
+import Place from '../Place/Place'
 
 class App extends Component {
   constructor () {
@@ -59,11 +61,13 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword alert={this.alert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} exact path='/places' component={Places} />
-          <AuthenticatedRoute user={user} exact path='/places/:id' component={Place} />
+          <AuthenticatedRoute user={user} exact path='/places' render={(props) => (<Places {...props} alert={this.alert} user={user}/>)} />
+          <AuthenticatedRoute user={user} exact path='/' render={(props) => (<Home {...props} alert={this.alert} user={user}/>)} />
           <AuthenticatedRoute user={user} exact path='/items/:id' render={(props) => (<Reviews {...props} alert={this.alert} user={user}/>)} />
           <AuthenticatedRoute user={user} exact path='/items/:id/reviews' render={(props) => (<CreateReview {...props} alert={this.alert} user={user}/>)} />
           <AuthenticatedRoute user={user} exact path='/items/:id/reviews/:rid' render={(props) => (<EditReview alert={this.alert} {...props} user={user}/>)} />
+          <AuthenticatedRoute user={user} exact path='/places/:id/items' render={(props) => (<CreateItem alert={this.alert} {...props} user={user}/>)} />
+          <AuthenticatedRoute user={user} exact path='/places/:id' render={(props) => (<Place {...props} alert={this.alert} user={user}/>)} />
 
         </main>
       </Fragment>
