@@ -4,7 +4,23 @@ import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 import Emoji from 'react-emoji-render'
+import { Card, CardImg, CardTitle, CardText, Row, Col } from 'reactstrap'
+import noms from './noms.png'
 // import Container from 'react-bootstrap/Container'
+
+const style = {
+  // boxShadow: '1px -1px 1px 1px rgba(0,0,0,0.75)',
+  height: '40vh',
+  margin: '6px',
+  fontFamily: 'Maven Pro',
+  fontSize: '15px'
+}
+
+const styleButton = {
+  backgroundColor: 'white',
+  borderColor: 'white',
+  color: 'blue'
+}
 
 const Reviews = ({ user, match, alert, history }) => {
   const [reviews, setreviews] = useState([])
@@ -25,10 +41,6 @@ const Reviews = ({ user, match, alert, history }) => {
       })
       .catch(() => alert({ heading: 'Rut roh', message: 'Something went wrong', variant: 'danger' }))
   }, [])
-
-  const styles = {
-    fontWeight: 'bold'
-  }
 
   const destroy = (id) => {
     event.preventDefault()
@@ -52,20 +64,22 @@ const Reviews = ({ user, match, alert, history }) => {
   }
 
   const reviewJsx = reviews.map(review => (
-    <div key={review._id}>
-      <div style={styles}> {review.owner.email} </div>
-      rating: <Emoji text= {repeat(review.rating)}/> <br/>
-      <img src={review.url}/> <br/>
-      { review.owner.token === user.token && <Link to={`/items/${match.params.id}/reviews/${review._id}`}><Button>Edit the review</Button></Link>}
-      { review.owner.token === user.token && <Button onClick={ () => destroy(review._id) }>Delete</Button>}
-    </div>
+    <Col md="3" sm="6" xs="12" key={review._id}>
+      <Card body style={style} >
+        <CardImg src={review.url ? review.url : noms }/>
+        <CardTitle style={{ height: '10%' }}>{review.owner.email}</CardTitle>
+        <CardText><Emoji text= {repeat(review.rating)}/><br/>
+          {review.owner.token === user.token && <Link to={`/items/${match.params.id}/reviews/${review._id}`}><Button style={styleButton}>Edit</Button></Link>}
+          { review.owner.token === user.token && <Button style={styleButton} onClick={ () => destroy(review._id) }>Delete</Button>}</CardText>
+      </Card>
+    </Col>
   ))
 
   return (
     <Fragment>
       <br />
-      <Link to={`/items/${match.params.id}/reviews`}><Button>Write a review!</Button></Link> <br />
-      {reviewJsx}
+      <Link to={`/items/${match.params.id}/reviews`}><Button style={{ backgroundColor: '#E58932', color: '#6c6258', margin: '6px', fontFamily: 'Muli' }}>Add your review</Button></Link> <br />
+      <Row>{reviewJsx}</Row>
     </Fragment>
   )
 }
