@@ -21,7 +21,7 @@ const ItemForm = ({ item, handleChange, handleSubmit, match }) => {
           value={item.name}
         />
       </Form.Group>
-      <Button style={{ style }} variant="danger" type="submit">Submit</Button>
+      <Button style={{ style }} variant="danger" type="submit">Next</Button>
       <Button style={{ style }} variant="secondary" href={cancelPath} className="ml-2">Cancel</Button>
     </Form>
   )
