@@ -7,7 +7,7 @@ import ItemForm from './ItemForm'
 const style = {
   fontFamily: 'Maven Pro',
   fontSize: '20px',
-  textAlign: 'left',
+  textAlign: 'center',
   padding: '15px'
 }
 
@@ -40,11 +40,13 @@ const CreateItem = ({ user, match, alert, history }) => {
   return (
     <Fragment>
       <h1 style={style}>What dish did you have?</h1>
-      <ItemForm
-        item ={item}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-      />
+      <div style={{ justifyContent: 'center', textAlign: 'center', padding: '20px' }}>
+        <ItemForm
+          item ={item}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+        />
+      </div>
     </Fragment>
   )
 }

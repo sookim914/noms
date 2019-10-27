@@ -27,6 +27,7 @@ const Home = ({ user, alert, history }) => {
   //   })
   // }
   // console.log(latlong)
+  // useEffect(() => getLocation())
 
   const handleChange = event => {
     event.persist()
