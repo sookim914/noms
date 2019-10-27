@@ -3,7 +3,8 @@ import { withRouter, Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
-import { Card, CardTitle, CardText, Row, Col } from 'reactstrap'
+import { Card, CardTitle, Row, Col } from 'reactstrap'
+import StarRatings from 'react-star-ratings'
 
 const style = {
   // boxShadow: '1px -1px 1px 1px rgba(0,0,0,0.75)',
@@ -31,20 +32,27 @@ const Place = ({ user, alert, match, history }) => {
   if (!place) {
     return <p>Loading...</p>
   }
-
+  // {item.reviews.length > 1 ? item.reviews.reduce((accReview, currReview) => {
+  //   return parseInt(accReview['rating']) + parseInt(currReview['rating'])
+  // }) : 1 }
   const itemJsx = place.items.map(item => (
     <Col md="3" sm="6" key={item._id}>
       <Card body style={style}>
         <CardTitle><Link to={`/items/${item._id}`}>{item.name}</Link></CardTitle>
-        <CardText></CardText>
+        <StarRatings
+          rating = {item.reviews.length > 0 ? (item.reviews.map(review => parseInt(JSON.stringify(review['rating']))).reduce((acc, curr) => acc + curr, 0)) / item.reviews.length : 0}
+          starDimension="25px"
+          starRatedColor="gold"
+          starSpacing="2px"
+        />
       </Card>
     </Col>
   ))
 
   return (
     <Fragment>
-      <h1 style={{ textAlign: 'center', fontFamily: 'Cabin Condensed', fontSize: '25px', margin: '10px' }}>{place.name}</h1>
-      <p style={{ textAlign: 'center', fontFamily: 'Cabin Condensed', fontSize: '20px' }}>
+      <h1 style={{ textAlign: 'center', color: '#6c6258', fontFamily: 'Candal', fontSize: '25px', margin: '10px' }}>{place.name}</h1>
+      <p style={{ textAlign: 'center', fontFamily: 'Cabin Condensed', color: '#6c6258', fontSize: '20px' }}>
         {'Can\'t find your dish? Be the first to review!'} <br/>
         <Button style={{ backgroundColor: 'white', borderColor: 'white' }}><Link to={`/places/${match.params.id}/items`}> Write a review</Link></Button>
       </p>
