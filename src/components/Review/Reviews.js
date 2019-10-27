@@ -16,14 +16,15 @@ const style = {
   fontSize: '15px'
 }
 
-const styleButton = {
-  backgroundColor: 'white',
-  borderColor: 'white',
-  color: 'blue'
+const button = {
+  fontFamily: 'Muli',
+  fontSize: '16px',
+  margin: '6px'
 }
 
 const Reviews = ({ user, match, alert, history }) => {
   const [reviews, setreviews] = useState([])
+  const [item, setItem] = useState([])
 
   useEffect(() => {
     axios({
@@ -31,6 +32,7 @@ const Reviews = ({ user, match, alert, history }) => {
       url: `${apiUrl}/items/${match.params.id}`
     })
       .then(responseData => {
+        setItem(responseData.data.item.name)
         setreviews(responseData.data.item.reviews)
         return responseData
       })
@@ -51,7 +53,7 @@ const Reviews = ({ user, match, alert, history }) => {
         'Authorization': `Bearer ${user.token}`
       }
     })
-      .then(() => alert({ heading: 'Success', message: 'You deleted a review', variant: 'success' }))
+      .then(() => alert({ zIndex: 1, heading: 'Success', message: 'You deleted a review', variant: 'success' }))
       .then(() => {
         history.replace('/reload')
         history.replace(`/items/${match.params.id}`)
@@ -66,19 +68,22 @@ const Reviews = ({ user, match, alert, history }) => {
   const reviewJsx = reviews.map(review => (
     <Col md="3" sm="6" xs="12" key={review._id}>
       <Card body style={style} >
-        <CardImg src={review.url ? review.url : noms }/>
-        <CardTitle style={{ height: '10%' }}>{review.owner.email}</CardTitle>
-        <CardText><Emoji text= {repeat(review.rating)}/><br/>
-          {review.owner.token === user.token && <Link to={`/items/${match.params.id}/reviews/${review._id}`}><Button style={styleButton}>Edit</Button></Link>}
-          { review.owner.token === user.token && <Button style={styleButton} onClick={ () => destroy(review._id) }>Delete</Button>}</CardText>
+        <div style={{ color: '#6c6258', fontSize: '12px' }}>{review.owner.email}</div>
+        <CardImg style={{ height: '60%' }} src={review.url ? review.url : noms }/>
+        <CardTitle style={{ fontStyle: 'italic', color: 'black' }}>{review.comment ? '"' + review.comment + '"' : null} </CardTitle>
+        <CardText style={{ textAlign: 'center' }}><Emoji text= {repeat(review.rating)}/><br/>
+
+          {review.owner.token === user.token && <Link to={`/items/${match.params.id}/reviews/${review._id}`}><Button style={button} variant='danger'>Edit</Button></Link>}
+
+          { review.owner.token === user.token && <Button variant='secondary'style={button} onClick={ () => destroy(review._id) }>Delete</Button>}</CardText>
       </Card>
     </Col>
   ))
 
   return (
     <Fragment>
-      <br />
-      <Link to={`/items/${match.params.id}/reviews`}><Button style={{ backgroundColor: '#E58932', color: '#6c6258', margin: '6px', fontFamily: 'Muli' }}>Add your review</Button></Link> <br />
+      <div style={{ fontFamily: 'Candal', textAlign: 'left', margin: '6px', fontSize: '25px', color: '#6c6258' }}>{item}</div>
+      <Link to={`/items/${match.params.id}/reviews`}><Button style={{ backgroundColor: 'white', borderColor: '#E58932', color: '#6c6258', margin: '6px', fontFamily: 'Muli' }}>Add your review</Button></Link> <br />
       <Row>{reviewJsx}</Row>
     </Fragment>
   )
