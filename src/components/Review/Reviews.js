@@ -11,7 +11,7 @@ import noms from './noms.png'
 const style = {
   // boxShadow: '1px -1px 1px 1px rgba(0,0,0,0.75)',
   height: '40vh',
-  margin: '6px',
+  margin: '2px',
   fontFamily: 'Maven Pro',
   fontSize: '15px'
 }

@@ -1,15 +1,18 @@
-import React, { useState, useEffect, Fragment } from 'react'
+import React, { useState, useEffect } from 'react'
 import StarRatings from 'react-star-ratings'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
-
+import { Card } from 'reactstrap'
 import apiUrl from '../../apiConfig'
 import ReviewForm from './ReviewForm'
+
+const style = { textAlign: 'center', margin: '10px' }
 
 const EditReview = ({ user, match, alert, history }) => {
   const reviewObject = {
     rating: 0,
-    url: ''
+    url: '',
+    comment: ''
   }
   const [review, setReview] = useState(reviewObject)
 
@@ -53,21 +56,26 @@ const EditReview = ({ user, match, alert, history }) => {
   }
 
   return (
-    <Fragment>
-      <StarRatings
-        starRatedColor="gold"
-        starHoverColor="gold"
-        changeRating={handleStarChange}
-        rating={review.rating}
-        name='rating'
-      />
-      <ReviewForm
-        review={review}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        cancelPath={`/items/${match.params.id}`}
-      />
-    </Fragment>
+    <Card style={{ display: 'flex', justifyContent: 'center', height: '100%', alignItems: 'center', margin: '50px' }}>
+      <div style={style}>
+        <div style={{ fontFamily: 'Muli', fontSize: '16px', color: '#6c6258' }}>Edit your review</div>
+        <StarRatings
+          starRatedColor="gold"
+          starHoverColor="gold"
+          starDimension="25px"
+          starSpacing="8px"
+          changeRating={handleStarChange}
+          rating={review.rating}
+          name='rating'
+        />
+        <ReviewForm
+          review={review}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          cancelPath={`/items/${match.params.id}`}
+        />
+      </div>
+    </Card>
   )
 }
 
