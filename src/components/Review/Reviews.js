@@ -66,16 +66,18 @@ const Reviews = ({ user, match, alert, history }) => {
   }
 
   const reviewJsx = reviews.map(review => (
-    <Col md="3" sm="6" xs="12" key={review._id}>
+    <Col lg="3" md="6" sm="6" key={review._id}>
       <Card body style={style} >
         <div style={{ color: '#6c6258', fontSize: '12px' }}>{review.owner.email}</div>
         <CardImg style={{ height: '60%' }} src={review.url ? review.url : noms }/>
         <CardTitle style={{ fontStyle: 'italic', color: 'black' }}>{review.comment ? '"' + review.comment + '"' : null} </CardTitle>
-        <CardText style={{ textAlign: 'center' }}><Emoji text= {repeat(review.rating)}/><br/>
+        <CardText style={{ textAlign: 'center' }}><Emoji text= {repeat(review.rating)}/></CardText>
 
+        <CardText style={{ textAlign: 'center' }}>
           {review.owner.token === user.token && <Link to={`/items/${match.params.id}/reviews/${review._id}`}><Button style={button} variant='danger'>Edit</Button></Link>}
 
-          { review.owner.token === user.token && <Button variant='secondary'style={button} onClick={ () => destroy(review._id) }>Delete</Button>}</CardText>
+          { review.owner.token === user.token && <Button variant='secondary'style={button} onClick={ () => destroy(review._id) }>Delete</Button>}
+        </CardText>
       </Card>
     </Col>
   ))

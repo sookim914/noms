@@ -8,6 +8,14 @@ import { Card, CardTitle } from 'reactstrap'
 
 const style = { textAlign: 'center', margin: '10px' }
 
+const cardStyle = {
+  display: 'flex',
+  justifyContent: 'center',
+  height: '100%',
+  alignItems: 'center',
+  margin: '50px'
+}
+
 const CreateReview = ({ user, match, alert }) => {
   const reviewObject = {
     rating: 0,
@@ -59,7 +67,7 @@ const CreateReview = ({ user, match, alert }) => {
   }
 
   return (
-    <Card style={{ display: 'flex', justifyContent: 'center', height: '100%', alignItems: 'center', margin: '50px' }}>
+    <Card style={cardStyle}>
       <div style={style}>
         <CardTitle style={{ fontFamily: 'Candal', fontSize: '25px', margin: '10px', color: '#6c6258' }} >{item}</CardTitle>
         <div style={{ fontFamily: 'Muli', fontSize: '16px', color: '#6c6258' }}>Rate your dish</div>
