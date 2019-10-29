@@ -70,6 +70,7 @@ const Home = ({ user, alert, history }) => {
           handleChange={handleChange}
           handleSubmit={handleSubmit}
         /> </div> <br />
+      <div style={{ textAlign: 'center', fontStyle: 'italic' }}> <Link to={'/places/5db70218a5cd9e0017c06960'}>Check Out the Most-Reviewed Restuarant!</Link></div>
       <Row>{placesJsx}</Row>
     </Fragment>
   )
