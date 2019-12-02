@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment, useEffect } from 'react'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 import { Link } from 'react-router-dom'
@@ -15,19 +15,18 @@ const style = {
 
 const Home = ({ user, alert, history }) => {
   const [places, setplaces] = useState([])
-  // const [latlong, setlatlong] = useState('')
+  const [latlong, setlatlong] = useState('')
   const [query, setQuery] = useState({
     query: ''
   })
   // dependency list -> we can run dependency list and anytime it changes, I would like you to run this function. Use this effect and treated as componentdidmount
 
-  // const getLocation = () => {
-  //   navigator.geolocation.getCurrentPosition(response => {
-  //     setlatlong(response.coords.latitude + ',' + response.coords.longitude)
-  //   })
-  // }
-  // console.log(latlong)
-  // useEffect(() => getLocation())
+  const getLocation = () => {
+    navigator.geolocation.getCurrentPosition(response => {
+      setlatlong(response.coords.latitude + ',' + response.coords.longitude)
+    })
+  }
+  useEffect(() => getLocation())
 
   const handleChange = event => {
     event.persist()
@@ -42,7 +41,7 @@ const Home = ({ user, alert, history }) => {
       headers: {
         'Authorization': `Bearer ${user.token}`
       },
-      data: query
+      data: { query, latlong }
     })
       .then(data => setplaces(data.data))
       .then(() => setQuery({ query: '' }))
