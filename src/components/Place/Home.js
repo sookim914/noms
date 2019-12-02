@@ -21,12 +21,13 @@ const Home = ({ user, alert, history }) => {
   })
   // dependency list -> we can run dependency list and anytime it changes, I would like you to run this function. Use this effect and treated as componentdidmount
 
-  const getLocation = () => {
+  useEffect(() => {
     navigator.geolocation.getCurrentPosition(response => {
       setlatlong(response.coords.latitude + ',' + response.coords.longitude)
-    })
-  }
-  useEffect(() => getLocation())
+    }, err => {
+      console.log(err)
+    }, { enableHighAccuracy: true, timeout: 20000, maximumAge: 0 })
+  }, [])
 
   const handleChange = event => {
     event.persist()
@@ -45,9 +46,6 @@ const Home = ({ user, alert, history }) => {
     })
       .then(data => setplaces(data.data))
       .then(() => setQuery({ query: '' }))
-      // .then(() => {
-      //   history.replace('/places')
-      // })
       .catch(() => alert({ heading: 'Rut roh', message: 'Something went wrong', variant: 'danger' }))
   }
 

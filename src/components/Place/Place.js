@@ -15,7 +15,7 @@ const style = {
 }
 
 const Place = ({ user, alert, match, history }) => {
-  const [place, setplace] = useState({ items: [], name: '' })
+  const [menu, setmenu] = useState([])
   // const [deleted, setDeleted] = useState(false)
   // dependency list -> we can run dependency list and anytime it changes, I would like you to run this function. Use this effect and treated as componentdidmount
   useEffect(() => {
@@ -24,18 +24,18 @@ const Place = ({ user, alert, match, history }) => {
       url: `${apiUrl}/places/${match.params.id}`
     })
       .then(responseData => {
-        setplace(responseData.data.place)
+        setmenu(responseData.data)
       })
       .catch(() => alert({ heading: 'Rut roh', message: 'Something went wrong', variant: 'danger' }))
   }, [])
 
-  if (!place) {
+  if (!menu) {
     return <p>Loading...</p>
   }
   // {item.reviews.length > 1 ? item.reviews.reduce((accReview, currReview) => {
   //   return parseInt(accReview['rating']) + parseInt(currReview['rating'])
   // }) : 1 }
-  const itemJsx = place.items.map(item => (
+  const itemJsx = menu.map(item => (
     <Col md="3" sm="6" key={item._id}>
       <Card body style={style}>
         <CardTitle><Link to={`/items/${item._id}`}>{item.name}</Link></CardTitle>
@@ -51,10 +51,9 @@ const Place = ({ user, alert, match, history }) => {
 
   return (
     <Fragment>
-      <h1 style={{ textAlign: 'center', color: '#6c6258', fontFamily: 'Candal', fontSize: '25px', margin: '10px' }}>{place.name}</h1>
       <p style={{ textAlign: 'center', fontFamily: 'Cabin Condensed', color: '#6c6258', fontSize: '20px' }}>
         {'Can\'t find your dish? Be the first to review!'} <br/>
-        <Button style={{ backgroundColor: 'white', borderColor: 'white' }}><Link to={`/places/${match.params.id}/items`}> Write a review</Link></Button>
+        <Button style={{ backgroundColor: 'white', borderColor: 'white' }}><Link to={`/places/${match.params.id}/items`}> Click here to add your dish and write a review</Link></Button>
       </p>
       <Row>{itemJsx}</Row>
     </Fragment>
