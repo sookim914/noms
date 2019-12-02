@@ -13,7 +13,10 @@ const style = {
   height: '45vh',
   margin: '2px',
   fontFamily: 'Maven Pro',
-  fontSize: '15px'
+  fontSize: '15px',
+  '@media only screen and (max-width: 732em)': {
+    height: '55vh'
+  }
 }
 
 const button = {
