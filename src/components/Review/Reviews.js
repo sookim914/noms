@@ -14,7 +14,7 @@ const style = {
   margin: '2px',
   fontFamily: 'Maven Pro',
   fontSize: '15px',
-  '@media only screen and (max-width: 732em)': {
+  '@media only screen and (maxWidth: 732em)': {
     height: '55vh'
   }
 }

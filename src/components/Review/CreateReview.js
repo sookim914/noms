@@ -33,7 +33,7 @@ const CreateReview = ({ user, match, alert }) => {
   }
 
   const handleStarChange = event => {
-    setReview({ url: review.url, rating: event })
+    setReview({ ...review, url: review.url, rating: event })
   }
   const handleSubmit = event => {
     event.preventDefault()
