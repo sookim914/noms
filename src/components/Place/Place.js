@@ -24,7 +24,7 @@ const Place = ({ user, alert, match, history }) => {
       url: `${apiUrl}/places/${match.params.id}`
     })
       .then(responseData => {
-        setmenu(responseData.data)
+        setmenu(responseData.data.place.items)
       })
       .catch(() => alert({ heading: 'Rut roh', message: 'Something went wrong', variant: 'danger' }))
   }, [])
