@@ -87,6 +87,10 @@ class SignIn extends Component {
             >
               Submit
             </Button>
+            <p>
+              <div>** If you are here just to see how this app works, sign in with these dummy credentials:</div>
+              <div>Username: explore@2    Password: 2</div>
+            </p>
           </Form>
         </div>
       </div>
